@@ -14,15 +14,36 @@ npm run prod: 生产环境编译
 config 配置文件
 src 源代码
 
+./
+├── README.md
+├── config
+│   ├── webpack.dev.js
+│   └── webpack.prod.js
+├── src
+│   ├── component
+│   ├── model
+│   └── pages
+│        ├── simpleSPA
+│        └── simpleWapPage
+│   ├── unit
+│   └── template.html
+├── .babelrc
+├── .editorconfig
+├── .eslintrc
+├── .gitignore
+├── .npmignore
+├── .npmrc
+├── package.json
+├── postcss.config.js
+└── README.md
 
 ### npm源设置
-npm set registry http://npm.corp.rs.com/
+npm set registry
 
 
 
 ### 待完成功能1.0
 - 代理未设置
-- 公用剥离
 - prod 去除console
 
 

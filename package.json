@@ -1,13 +1,13 @@
 {
   "name": "antd-tools-ydl",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "ydl react",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dvajs/dva-cli"
+    "url": "http://gitlab.yidianling.com/yidianling_static/ydl-fe-tool"
   },
-  "homepage": "https://github.com/dvajs/dva-cli",
-  "mail": "chencheng <sorrycc@gmail.com>",
+  "homepage": "http://gitlab.yidianling.com/yidianling_static/ydl-fe-tool",
+  "mail": "chris.fu <fuyun@yidianling.com>",
   "license": "MIT",
   "bin": {
     "ydlstart": "./bin/tool-ydl"
