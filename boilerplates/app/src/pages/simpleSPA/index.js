@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter, Route, Switch} from 'react-router-dom';
+import {Layout1} from '../../component/layout';
 
 import routers from './router';
 
@@ -10,6 +11,8 @@ class Main extends Component {
       <div>
         <HashRouter>
           <div className="container">
+            <Route path="/" component={Layout1}/>
+
             <Switch>
               {routers.map((route, i) => {
                 return (<Route key={i} path={route.path} component={route.component}/>);

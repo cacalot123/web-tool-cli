@@ -2,6 +2,7 @@ const path = require('path');
 const glob = require('glob');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const packageJson = require('../package');
 
 /***
  * 获取指定路径下的入口文件
@@ -25,7 +26,7 @@ function getTemplate(globPath) {
     entries = [];
   files.forEach(function (filepath, index) {
     const split = filepath.split('/');
-    const template = `./${filepath.substring(0, filepath.lastIndexOf('.js'))}.html`
+    // const template = `./${filepath.substring(0, filepath.lastIndexOf('.js'))}.html`
     const name = split[split.length - 2];
     //entries[name] = './' + filepath;
     // console.log(index)
@@ -85,24 +86,36 @@ function setHtmlPluginConfig(arrayString) {
   return plugin;
 }
 
+/***
+ * outputHandle
+ * @function outputHandle
+ * ***/
+function outputHandle() {
+  const output = {
+    path: path.resolve(__dirname, '../dist'),         // 出口文件位置，一定要是绝对路径
+    // filename: '[name]/index.[chunkhash].js',      // 出口文件名
+    filename: '[name].[chunkhash].js'     // 出口文件名
+  };
+  if (packageJson.domain) {
+    output.publicPath = `//dev.${packageJson.domain}/${packageJson.name}`;
+  }
+  return output;
+}
+
 //生成 html-webpack-plugin 循环参数配置
 const htmlPlugin = setHtmlPluginConfig(Template);
-
+const outputJson = outputHandle();
+console.log(outputJson)
 
 module.exports = {
   mode: 'development',
   entry: entries,
-  output: {                                                 // 出口文件
-    path: path.resolve(__dirname, '../dist'),         // 出口文件位置，一定要是绝对路径
-    filename: '[name].[chunkhash].js'      // 出口文件名
-    // publicPath: '//cdn.com/'    // 上线的地址
-
-  },
-  // devtool: 'source-map',
+  output: outputJson,                                             // 出口文件
   devServer: {
     port: 8888,             // 监听端口
     compress: true,         // gzip压缩
-    https: true             //配置https
+    https: true,             //配置https
+    publicPath: '/'
   },
   plugins: [
     ...htmlPlugin,

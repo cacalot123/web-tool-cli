@@ -86,10 +86,9 @@ jspm_packages
 ### Yeoman template
 node_modules/
 bower_components/
-*.log
 
-dist/
 build/
+dist/
 rev/
 target/
 */target/
@@ -102,7 +101,6 @@ target/
 *.project
 *.iml
 *.ipr
-*.iws
 classes/
 disconf/
 */disconf/

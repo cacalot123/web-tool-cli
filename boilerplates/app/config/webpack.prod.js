@@ -1,8 +1,8 @@
 const path = require('path');
 const glob = require('glob');
 const htmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const packageJson = require("../package");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const packageJson = require('../package');
 
 /***
  * 获取指定路径下的入口文件
@@ -30,7 +30,7 @@ function getTemplate(globPath) {
     const name = split[split.length - 2];
     //entries[name] = './' + filepath;
     // console.log(index)
-    entries[index] = {}
+    entries[index] = {};
     entries[index].name = name;
     entries[index].src = './' + filepath;
     entries[index].template = './src/template.html';
@@ -79,28 +79,39 @@ function setHtmlPluginConfig(arrayString) {
           keepClosingSlash: true,
           minifyJS: true,
           minifyCSS: true,
-          minifyURLs: true,
+          minifyURLs: true
         }
       })
-    )
-  })
-  return plugin
+    );
+  });
+  return plugin;
+}
+
+/***
+ * outputHandle
+ * @function outputHandle
+ * ***/
+function outputHandle() {
+  const output = {
+    path: path.resolve(__dirname, '../dist'),         // 出口文件位置，一定要是绝对路径
+    // filename: '[name]/index.[chunkhash].js',      // 出口文件名
+    filename: '[name].[chunkhash].js'     // 出口文件名
+  };
+  if (packageJson.domain) {
+    output.publicPath = `//${packageJson.domain}/${packageJson.name}`;
+  }
+  return output;
 }
 
 //生成 html-webpack-plugin 循环参数配置
-let htmlPlugin = setHtmlPluginConfig(Template)
-
+const htmlPlugin = setHtmlPluginConfig(Template)
+const outputJson = outputHandle();
 
 
 module.exports = {
-  mode: "production",
+  mode: 'production',
   entry: entries,
-  output: {                                                 // 出口文件
-    path: path.resolve(__dirname, '../dist'),         // 出口文件位置，一定要是绝对路径
-    filename: '[name]/index.[chunkhash].js',      // 出口文件名
-    publicPath: `//mvcstatic.ydlcdn.com/${packageJson.name}`    // 上线的地址
-
-  },
+  output:  outputJson,
   // devtool: 'source-map',
   plugins: [
     ...htmlPlugin,
@@ -110,15 +121,6 @@ module.exports = {
       filename: "[name].css",
       chunkFilename: "[id].css"
     })
-    // ,
-    // new UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false,
-    //     drop_debugger: true,
-    //     drop_console: true
-    //   },
-    //   sourceMap: true
-    // })
   ],
   optimization: {//包清单
     // runtimeChunk: {
