@@ -1,6 +1,6 @@
 {
   "name": "antd-tools-ydl",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "ydl react",
   "repository": {
     "type": "git",
@@ -11,7 +11,6 @@
   "license": "MIT",
   "bin": {
     "ydlstart": "./bin/tool-ydl"
-
   },
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib"
