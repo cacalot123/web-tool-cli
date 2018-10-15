@@ -1,8 +1,17 @@
 const path = require('path');
 const glob = require('glob');
+const merge = require('webpack-merge');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const packageJson = require('../package');
+const fs = require('fs');
+const webpackBaseConfig = require('./webpack.rules.js');
+
+fs.open('./config/env.js', 'w', function (err, fd) {
+  const buf = 'export default "0";';
+  fs.write(fd, buf, 0, 'utf-8', function (err, written, buffer) {
+  });
+});
 
 /***
  * 获取指定路径下的入口文件
@@ -92,12 +101,12 @@ function setHtmlPluginConfig(arrayString) {
  * ***/
 function outputHandle() {
   const output = {
-    path: path.resolve(__dirname, '../dist'),         // 出口文件位置，一定要是绝对路径
+    path: path.resolve(__dirname, `../dist/${packageJson.name}`),         // 出口文件位置，一定要是绝对路径
     // filename: '[name]/index.[chunkhash].js',      // 出口文件名
     filename: '[name].[chunkhash].js'     // 出口文件名
   };
   if (packageJson.domain) {
-    output.publicPath = `//dev.${packageJson.domain}/${packageJson.name}`;
+    //output.publicPath = `//dev.${packageJson.domain}/${packageJson.name}`;
   }
   return output;
 }
@@ -107,14 +116,14 @@ const htmlPlugin = setHtmlPluginConfig(Template);
 const outputJson = outputHandle();
 console.log(outputJson)
 
-module.exports = {
+module.exports = merge(webpackBaseConfig, {
   mode: 'development',
   entry: entries,
   output: outputJson,                                             // 出口文件
   devServer: {
     port: 8888,             // 监听端口
     compress: true,         // gzip压缩
-    https: true,             //配置https
+    https: false,             //配置https
     publicPath: '/'
   },
   plugins: [
@@ -126,64 +135,7 @@ module.exports = {
       chunkFilename: '[id].css'
     })
   ],
-  optimization: {//包清单
-    // runtimeChunk: {
-    //   name: "manifest"
-    // },
-    //拆分公共包
-    splitChunks: {
-      cacheGroups: {
-        //项目公共组件
-        common: {
-          chunks: 'initial',
-          name: 'common',
-          minChunks: 2,
-          maxInitialRequests: 5,
-          minSize: 0
-        },
-        //第三方组件
-        vendor: {
-          test: /node_modules/,
-          chunks: 'initial',
-          name: 'vendor',
-          priority: 10,
-          enforce: true
-        }
-      }
-    }
-  },
   module: {
-    strictExportPresence: true,
-    rules: [
-      {
-        test: /\.(js|jsx|mjs)$/,
-        use: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,  // replace ExtractTextPlugin.extract({..})
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.(sass|scss)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        //use: ['file-loader']
-        use: [
-          {
-            // url-loader内置了file-loader
-            loader: 'url-loader',
-            options: {
-              limit: 8192,    // 小于8k的图片自动转成base64格式，并且不会存在实体图片
-              outputPath: 'images/'   // 图片打包后存放的目录
-            }
-          }
-        ]
-      }
-    ]
+    strictExportPresence: true
   }
-};
+});

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './index.scss';
 import {getUrlParams} from '../../../unit/getUrl';
 import hoc from './wrapSample';
-import baseModel from "../../../model/baseModel";
+import sampleApi from "../../../model/sample";
 
 
 @hoc
@@ -10,7 +10,6 @@ class Index extends Component {
   constructor(props) {
     super(props);
     const t = this;
-    t.baseModel = baseModel;
     t.state = {
       post: "list"
     }
@@ -26,14 +25,10 @@ class Index extends Component {
     const t = this;
     postData.name = "hah";
     postData.id = "22";
-
-    this.baseModel.baseGetTest(postData).then((dataMap) => {
-      console.log(1, dataMap)
-    });
-    this.baseModel.basePostTest(postData).then((dataMap) => {
+    sampleApi.simpleGet(postData).then((dataMap) => {
       console.log(1, dataMap)
       t.setState({
-        post:dataMap.message
+        post:dataMap.msg
       })
     });
   }
@@ -43,7 +38,7 @@ class Index extends Component {
     return (
       <div className="index">
         index
-        <div className="list">list</div>
+        <div className="list"><a href="#">list</a></div>
         <div className="list">{this.state.post}</div>
 
       </div>

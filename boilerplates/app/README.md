@@ -17,6 +17,8 @@ src 源代码
 ./
 ├── README.md
 ├── config
+│   ├── env.js
+│   ├── webpack.rules.js
 │   ├── webpack.dev.js
 │   └── webpack.prod.js
 ├── src
@@ -44,8 +46,6 @@ npm set registry
 
 ### 待完成功能1.0
 - 代理未设置
-- prod 去除console
-
 
 ### 待完成功能2.0
 - webpack 封装

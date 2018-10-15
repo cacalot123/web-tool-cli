@@ -1,5 +1,5 @@
 module.exports = {
   plugins: [
-    require('postcss-px2rem')({remUnit: 75})
+    require('postcss-plugin-pxtorem')({rootValue: 75})
   ]
 };

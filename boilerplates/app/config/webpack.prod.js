@@ -1,8 +1,19 @@
 const path = require('path');
 const glob = require('glob');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const merge = require('webpack-merge');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const packageJson = require('../package');
+const fs = require('fs');
+const webpackBaseConfig = require('./webpack.rules.js');
+
+
+fs.open('./config/env.js', 'w', function (err, fd) {
+  const buf = 'export default "9";';
+  fs.write(fd, buf, 0, 'utf-8', function (err, written, buffer) {
+  });
+});
 
 /***
  * 获取指定路径下的入口文件
@@ -21,6 +32,11 @@ function getEntries(globPath) {
 }
 
 
+/***
+ * 获取指定路劲下的html模板
+ * @function getTemplate
+ * @param globPath
+ * ***/
 function getTemplate(globPath) {
   const files = glob.sync(globPath),
     entries = [];
@@ -93,12 +109,12 @@ function setHtmlPluginConfig(arrayString) {
  * ***/
 function outputHandle() {
   const output = {
-    path: path.resolve(__dirname, '../dist'),         // 出口文件位置，一定要是绝对路径
+    path: path.resolve(__dirname, `../dist/${packageJson.name}`),         // 出口文件位置，一定要是绝对路径
     // filename: '[name]/index.[chunkhash].js',      // 出口文件名
     filename: '[name].[chunkhash].js'     // 出口文件名
   };
   if (packageJson.domain) {
-    output.publicPath = `//${packageJson.domain}/${packageJson.name}`;
+    //output.publicPath = `//${packageJson.domain}/${packageJson.name}`;
   }
   return output;
 }
@@ -108,10 +124,10 @@ const htmlPlugin = setHtmlPluginConfig(Template)
 const outputJson = outputHandle();
 
 
-module.exports = {
+module.exports = merge(webpackBaseConfig, {
   mode: 'production',
   entry: entries,
-  output:  outputJson,
+  output: outputJson,
   // devtool: 'source-map',
   plugins: [
     ...htmlPlugin,
@@ -122,68 +138,22 @@ module.exports = {
       chunkFilename: "[id].css"
     })
   ],
-  optimization: {//包清单
-    // runtimeChunk: {
-    //   name: "manifest"
-    // },
-    //拆分公共包
-    splitChunks: {
-      cacheGroups: {
-        //项目公共组件
-        common: {
-          chunks: 'initial',
-          name: 'common',
-          minChunks: 2,
-          maxInitialRequests: 5,
-          minSize: 0
-        },
-        //第三方组件
-        vendor: {
-          test: /node_modules/,
-          chunks: 'initial',
-          name: 'vendor',
-          priority: 10,
-          enforce: true
+  module: {
+    strictExportPresence: true
+  },
+  optimization: {
+    minimizer: [new UglifyJsPlugin({
+      // Compression specific options
+      uglifyOptions: {
+        // Eliminate comments
+        comments: false,
+        compress: {
+          // remove warnings
+          warnings: false,
+          // Drop console statements
+          drop_console: true
         }
       }
-    }
-  },
-  module: {
-    strictExportPresence: true,
-    rules: [
-      {
-        test: /\.(js|jsx|mjs)$/,
-        use: "babel-loader"
-      },
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,  // replace ExtractTextPlugin.extract({..})
-          "css-loader"
-        ]
-      },
-      {
-        test: /\.(sass|scss)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        //use: ['file-loader']
-        use: [
-          {
-            // url-loader内置了file-loader
-            loader: 'url-loader',
-            options: {
-              limit: 8192,    // 小于8k的图片自动转成base64格式，并且不会存在实体图片
-              outputPath: 'images/'   // 图片打包后存放的目录
-            }
-          }
-        ]
-      }
-      // {
-      //   test: /\.scss$/,
-      //   loaders: ['style-loader', 'css-loader', 'sass-loader'],
-      // },
-    ]
+    })]
   }
-}
+});

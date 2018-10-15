@@ -1,9 +1,10 @@
 .index {
   width: 700px;
-  background: #666666
+  background: #666666;
+  .list {
+    width: 200PX;
+    background: #cccccc;
+  }
 }
 
-.list {
-  width: 100PX;
-  background: #666666
-}
+
