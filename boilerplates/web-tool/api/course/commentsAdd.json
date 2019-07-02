@@ -1,0 +1,10 @@
+/**
+ * 课程详情评论
+ *
+ * @url /comments/add
+ */
+{
+  "code": "200",
+  "data": "成功",
+  "msg": "string"
+}

@@ -14,7 +14,7 @@ function runCmd(cmd, args, fn) {
 }
 
 function findNpm() {
-  var npms = process.platform === 'win32' ? ['tnpm.cmd', 'cnpm.cmd', 'npm.cmd'] : ['tnpm', 'cnpm', 'npm'];
+  var npms = process.platform === 'win32' ? ['cnpm.cmd', 'tnpm.cmd', 'npm.cmd'] : ['cnpm', 'tnpm', 'npm'];
   for (var i = 0; i < npms.length; i++) {
     try {
       which.sync(npms[i]);
@@ -29,9 +29,9 @@ function findNpm() {
 export default function (done) {
   const npm = findNpm();
   runCmd(which.sync(npm), ['install'], function () {
-    runCmd(which.sync(npm), ['install', 'dva', '--save'], function () {
+    // runCmd(which.sync(npm), ['install', 'dva', '--save'], function () {
       console.log(npm + ' install end');
       done();
-    });
+    // });
   });
 };

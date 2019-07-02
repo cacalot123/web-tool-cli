@@ -1,0 +1,26 @@
+{
+  "presets": ["react-native-stage-0/decorator-support"],
+
+  "plugins": [
+    ["import", { "libraryName": "antd-mobile", "libraryDirectory": "es", "style": true }], // `style: true` 会加载 less 文件
+    [
+      "transform-runtime",
+      {
+        "helpers": false,
+        "polyfill": true,
+        "regenerator": true,
+        "moduleName": "babel-runtime"
+      }],
+      ["module-resolver",
+      {
+        "alias": {
+          "@component": "./src/component",
+          "@model": "./src/model/servers",
+          "@util": "./src/utils",
+          "@native": "./src/utils/native"
+        }
+      }
+    ],
+    ["syntax-dynamic-import"]
+  ]
+}

@@ -2,17 +2,17 @@
  - 基于react 前端脚手架
 
 ### 作者
- - Chris.Fu [fuyun@yidianling.com]
+ - Chris.Fu [1161167@qq.com]
 
 ### 本地运行
 
 
 ```bash
 ## 安装
-$ npm install antd-tools-ydl -g
+$ npm install web-tool -g
 
 ## 使用
-$ ydlstart new myapp
+$ cacalotstart new myapp
 
 $ cd myapp
 $ npm start

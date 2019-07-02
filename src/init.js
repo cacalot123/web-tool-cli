@@ -19,7 +19,7 @@ function success(message) {
 }
 
 function init({ demo, install }) {
-  const type = demo ? 'demo' : 'app';
+  const type = demo ? 'demo' : 'web-tool';
   const cwd = join(__dirname, '../boilerplates', type);
   const dest = process.cwd();
   const projectName = basename(dest);

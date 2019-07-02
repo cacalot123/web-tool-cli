@@ -1,0 +1,22 @@
+/**
+ * 课程详情评论
+ *
+ * @url /comments
+ */
+{
+  "code": "200",
+  "data|3": [
+    {
+      "commentId|+1": 0,
+      "content": "平路内容",
+      "courseId": 0,
+      "createTime": "2018-12-13T03:14:55.596Z",
+      "gender": "string",
+      "head": "https://img.ydlcdn.com/file/2018/11/26/4d69a03de482651d3fc1cc0d1ec3feb6..jpg!s200x200",
+      "nickName": "@name",
+      "parentId": 0,
+      "uid": 0
+    }
+  ],
+  "msg": "string"
+}

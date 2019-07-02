@@ -1,16 +1,16 @@
 {
-  "name": "antd-tools-ydl",
-  "version": "1.0.10",
-  "description": "ydl react",
+  "name": "web-tool",
+  "version": "1.0.0",
+  "description": "react",
   "repository": {
     "type": "git",
     "url": "http://gitlab.yidianling.com/yidianling_static/ydl-fe-tool"
   },
   "homepage": "http://gitlab.yidianling.com/yidianling_static/ydl-fe-tool",
-  "mail": "chris.fu <fuyun@yidianling.com>",
+  "mail": "chris.fu <1161167@qq.com>",
   "license": "MIT",
   "bin": {
-    "ydlstart": "./bin/tool-ydl"
+    "cacalotstart": "./bin/cacalot123"
   },
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib"
