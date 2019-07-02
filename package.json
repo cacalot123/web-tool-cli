@@ -1,12 +1,12 @@
 {
-  "name": "web-tool",
+  "name": "web-tool-cacalot",
   "version": "1.0.0",
   "description": "react",
   "repository": {
     "type": "git",
-    "url": "http://gitlab.yidianling.com/yidianling_static/ydl-fe-tool"
+    "url": "git@github.com:cacalot123/web-tool.git"
   },
-  "homepage": "http://gitlab.yidianling.com/yidianling_static/ydl-fe-tool",
+  "homepage": "https://github.com/cacalot123/web-tool",
   "mail": "chris.fu <1161167@qq.com>",
   "license": "MIT",
   "bin": {

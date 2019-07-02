@@ -1,4 +1,4 @@
-# antd-tools-ydl
+# web-tool
  - 基于react 前端脚手架
 
 ### 作者
@@ -9,7 +9,7 @@
 
 ```bash
 ## 安装
-$ npm install web-tool -g
+$ npm install web-tool-cacalot -g
 
 ## 使用
 $ cacalotstart new myapp
