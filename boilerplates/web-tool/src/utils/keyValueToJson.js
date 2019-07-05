@@ -13,7 +13,7 @@ export function keyValueToJson(keyValue, value, text) {
   let index = 0;
 
   for (const prop in obj) {
-    if (obj.hasOwnProperty(prop)) {
+    if (Object.prototype.hasOwnProperty.call(obj, prop)) {
       if (prop != 'value') {
         let getVal;
         if (value && text) {
@@ -21,7 +21,8 @@ export function keyValueToJson(keyValue, value, text) {
         } else {
           getVal = {key: prop, value: obj[prop]};
         }
-        newObj[index++] = getVal;
+        newObj[index] = getVal;
+        index = +1;
       }
     }
   }

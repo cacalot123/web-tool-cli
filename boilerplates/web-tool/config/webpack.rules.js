@@ -1,4 +1,5 @@
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const theme = require('../theme.js');
 
 module.exports = {
   optimization: {//包清单
@@ -53,17 +54,12 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', {
-          loader: 'less-loader', // compiles Less to CSS
-          options: {
-            modifyVars: {
-              'primary-color': '#1DA57A',
-              'link-color': '#1DA57A',
-              'border-radius-base': '2px'
-            },
-            javascriptEnabled: true
-          }
-        }]
+        use: [
+          'style-loader',
+          'css-loader',
+          {loader: 'less-loader', options: {modifyVars: theme}}
+        ],
+        include: /node_modules/
       },
       {
         test: /\.(png|svg|jpg|gif)$/,

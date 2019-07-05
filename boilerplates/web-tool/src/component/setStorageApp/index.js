@@ -21,6 +21,7 @@ const setStorageApp = function () {
   localJson.map((value) => {
     Storage[value.key] = value.value;
     localStorage.setItem(value.key, value.value);
+    return Storage;
   });
   console.log(Storage);
   return Storage;

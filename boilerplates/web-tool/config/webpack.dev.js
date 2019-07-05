@@ -3,10 +3,10 @@ const glob = require('glob');
 const merge = require('webpack-merge');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const packageJson = require('../package');
 const fs = require('fs');
-var vConsolePlugin = require('vconsole-webpack-plugin');
+const vConsolePlugin = require('vconsole-webpack-plugin');
 const webpackBaseConfig = require('./webpack.rules.js');
+const packageJson = require('../package');
 
 
 fs.open('./config/env.js', 'w', function (err, fd) {
@@ -112,18 +112,16 @@ function setHtmlPluginConfig(arrayString) {
  * @function outputHandle
  * ***/
 function outputHandle() {
-
-
   const output = {
-    path: path.resolve(__dirname, `../dist/${packageJson.name}`),         // 出口文件位置，一定要是绝对路径
+    path: path.resolve(__dirname, `../dist/${packageJson.name}`), //出口文件位置，一定要是绝对路径
     // filename: '[name]/index.[chunkhash].js',      // 出口文件名
-    filename: '[name].[chunkhash:8].js'   // 出口文件名
+    filename: '[name].[chunkhash:8].js' //出口文件名
   };
   if (process.env.thisEnv === 'dev') { //dev本地环境
     output.publicPath = '/';
   }
   if (process.env.thisEnv === 'test') { //测试环境
-    output.publicPath = '/fe-app-yidianling/';
+    output.publicPath = `/${packageJson.name}`;
   }
   if (packageJson.domain) {
     //output.publicPath = `//dev.${packageJson.domain}/${packageJson.name}`;

@@ -1,6 +1,6 @@
 const path = require('path');
 const glob = require('glob');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const merge = require('webpack-merge');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -113,7 +113,7 @@ function outputHandle() {
     path: path.resolve(__dirname, `../dist/${packageJson.name}`),         // 出口文件位置，一定要是绝对路径
     // filename: '[name]/index.[chunkhash].js',      // 出口文件名
     filename: '[name].[chunkhash:8].js',   // 出口文件名
-    publicPath: '/fe-app-yidianling/'
+    publicPath: `/${packageJson.name}`
   };
   if (packageJson.domain) {
     //output.publicPath = `//${packageJson.domain}/${packageJson.name}`;

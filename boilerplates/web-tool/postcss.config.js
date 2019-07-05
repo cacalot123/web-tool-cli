@@ -7,6 +7,6 @@ module.exports = {
     }),
     require('autoprefixer')({
       browsers: ['last 2 versions']
-    }) // so imports are auto-prefixed too
+    })
   ]
 };

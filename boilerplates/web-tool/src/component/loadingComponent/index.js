@@ -27,4 +27,3 @@ const loadingComponent = ({isLoading, error}) => {
 };
 export {loadingComponent};
 export default loadingComponent;
-

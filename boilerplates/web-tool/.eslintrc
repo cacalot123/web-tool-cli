@@ -5,6 +5,11 @@
     "localStorage": true,
     "window": true
   },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
   "rules": {
     "no-new": 0,
     "no-console": [0],
@@ -42,6 +47,7 @@
     "jsx-a11y/no-static-element-interactions": [0, "never"],
     "prefer-arrow-callback":0,
     "no-undef": [2],
-    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-restricted-syntax": 0
   }
 }

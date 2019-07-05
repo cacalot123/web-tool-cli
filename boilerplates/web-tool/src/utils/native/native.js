@@ -85,17 +85,6 @@ function sendDataToExp(params) {
   }
 }
 
-function gotoOCChatCall(args) {
-  const params = {};
-  params.cmd = {};
-
-  params.cmd.params = args;
-  params.cmd.action_name = 'chat_call';
-
-  params.url = 'ydl_app';
-
-  sendDataToExp(params);
-}
 
 function sendData(par, action_name, scheme, type) {
   const params = {};

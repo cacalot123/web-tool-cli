@@ -1,9 +1,10 @@
-# 壹点灵 app内嵌页面
 ## 作者 Chris.Fu
-### 邮箱 fuyun@yidianling.com
+### 邮箱 1161167@qq.com
 
 ## 使用说明:
 npm run start: 运行本地开发环境
+
+npm run api: mock环境
 
 npm run build: 测试环境编译
 
@@ -23,8 +24,8 @@ src 源代码
 │   ├── component
 │   ├── model
 │   └── pages
-│        ├── simpleSPA
-│        └── simpleWapPage
+│        ├── wrapper.js
+│        └── index.js
 │   ├── unit
 │   └── template.html
 ├── .babelrc
@@ -37,7 +38,6 @@ src 源代码
 ├── postcss.config.js
 └── README.md
 
-### npm源设置
-npm set registry
+
 
 

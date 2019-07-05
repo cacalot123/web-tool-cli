@@ -1,6 +1,5 @@
-import React,{ lazy } from 'react';
-import {Route} from 'react-router-dom';
-import wrapper from './../wrapper';
+import {lazy} from 'react';
+import wrapper from '../wrapper';
 
 const Index = wrapper(
   lazy(() => import('./index/index'))
@@ -14,11 +13,10 @@ const router = [{
   path: '/course/Detail/:courseId',
   name: 'Detail',
   component: Detail
-  },
-  {
-    path: '/course',
-    name: 'Index',
-    component: Index
-  }];
+}, {
+  path: '/course',
+  name: 'Index',
+  component: Index
+}];
 
 export default router;

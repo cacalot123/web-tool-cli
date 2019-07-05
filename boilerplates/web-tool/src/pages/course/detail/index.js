@@ -1,7 +1,8 @@
-import React, {lazy, PureComponent, Suspense} from 'react';
-import {setTitle} from '@util';
-import {setStorageApp} from '@component/setStorageApp';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+import {setStorageApp} from '@component/setStorageApp';
+import authCourse from '@model/authCourse';
+import {setTitle} from '@util';
 import style from './style.scss';
 
 // const DetailBottomButton = lazy(() => import('./detailBottomButton'));
@@ -9,9 +10,27 @@ import style from './style.scss';
 // const DetailUseCode = lazy(() => import('./detailUseCode'));
 // const DetailContent = lazy(() => import('./detailContent'));
 
-
+/***
+ * class类名
+ * @class DetailTitle
+ * @param data 数据
+ * ***/
+@connect((state) => {
+  const {count, commonVar} = state;
+  return {
+    count,
+    commonVar
+  };
+}, (dispatch) => {
+  const type = 'INCREASE';
+  return {
+    onIncreaseClick: () => dispatch({
+      type,
+      number: 20
+    })
+  };
+})
 class CourseDetailPage extends PureComponent {
-
   static type = 1;
 
   constructor(props) {
@@ -22,74 +41,17 @@ class CourseDetailPage extends PureComponent {
 
 
     t.state = {
-      params: t.props.match.params,
-      courseId: t.props.match.params.courseId,
-      CourseDetail: {
-        'applyEndTime': '2018-12-12T07:38:22.644Z',
-        'applyFee': 0,
-        'applyHeads': [],
-        'applyStartTime': '2018-12-12T07:38:22.644Z',
-        'childCourse': [
-          {
-            'applyFee': 0,
-            'id': 0,
-            'isInvite': 0,
-            'isPromotion': 0,
-            'joinNum': 0,
-            'originalApplyFee': 0,
-            'pic': '',
-            'promotionApplyFee': 111,
-            'readNums': 0,
-            'title': ''
-          }
-        ],
-        'commentNum': 0,
-        'content': '',
-        'courseStartTime': '2018-12-12T07:38:22.645Z',
-        'courseType': '',
-        'demoOption': '',
-        'desc': '',
-        'fitGroup': '',
-        'hostInfo': {
-          'doctorHead': '',
-          'doctorId': 0,
-          'doctorName': '',
-          'doctorUid': 0,
-          'fansNum': 0,
-          'goodAt': '',
-          'thsNum': 0,
-          'zixunOrderNum': 0
-        },
-        'hostUid': 0,
-        'id': 0,
-        'isBuy': false,
-        'isCoupon': false,
-        'isFav': false,
-        'isInvite': 0,
-        'isPromotion': 0,
-        'joinNum': 0,
-        'joinWay': '',
-        'originalApplyFee': 0,
-        'parentId': 0,
-        'pic': 'string',
-        'promotionApplyFee': 210,
-        'promotionCountDown': 0,
-        'readNums': 0,
-        'shareData': {
-          'cover': '',
-          'desc': '',
-          'shareUrl': '',
-          'title': ''
-        },
-        'subCourseNum': 0,
-        'tags': '',
-        'title': ''
-      }
+      title: ''
     };
   }
 
   componentDidMount() {
-
+    authCourse.getDetail().then((res) => {
+      console.log(res);
+      this.setState({
+        title: res.title
+      });
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -101,16 +63,6 @@ class CourseDetailPage extends PureComponent {
     postData.uid = localStorage.getItem('uid');
     // postData.accessToken = urlParams.sign;
     postData.ffrom = localStorage.getItem('ffrom');
-    authCourseApi.getDetail(postData)
-      .then((res) => {
-        this.setState({
-          CourseDetail: res
-        }, function () {
-          setTimeout(function () {
-          }, 3000);
-        });
-
-      });
   }
 
   componentDidUpdate() {
@@ -118,18 +70,30 @@ class CourseDetailPage extends PureComponent {
   }
 
   goNext = () => {
-    this.props.history.push({
+    const {props} = this;
+    props.history.push({
       pathname: '/course',
-      state: {'vcode': 'vcode'}
+      state: {vcode: 'vcode'}
     });
   };
 
   render() {
-    const {CourseDetail, courseId} = this.state;
+    const {count} = this.props;
+    const {title} = this.state;
     console.log('style.text', style);
     return (
       <div className="course_detail">
-        <div className={style.text} onClick={this.goNext}>find1<br/><br/><br/><br/><br/><br/><br/>
+        <span
+          className={style.text}
+          onMouseUp={() => this.goNext()}
+        >
+          toIndex
+        </span>
+        <div>
+          {count}
+        </div>
+        <div>
+          {title}
         </div>
       </div>
     );
