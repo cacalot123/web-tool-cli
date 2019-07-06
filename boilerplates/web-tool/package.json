@@ -5,7 +5,6 @@
   "main": "index.js",
   "domain": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env thisEnv=\"dev\" webpack-dev-server --inline --config=config/webpack.dev.js  --watch --color --devtool=source-map",
     "api": "nodemon app-server",
     "build": "rm -rf dist &&cross-env thisEnv=\"test\"  webpack --config=config/webpack.dev.js",
@@ -15,8 +14,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@gitlab.yidianling.com:2224/yidianling_static/ydl.build.git"
+    "url": "git@github.com:cacalot123/web-tool-cli.git"
   },
+  "homepage": "https://github.com/cacalot123/web-tool-cli",
   "keywords": [],
   "author": "",
   "license": "ISC",

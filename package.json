@@ -1,12 +1,12 @@
 {
   "name": "web-tool-cacalot",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "react",
   "repository": {
     "type": "git",
-    "url": "git@github.com:cacalot123/web-tool.git"
+    "url": "git@github.com:cacalot123/web-tool-cli.git"
   },
-  "homepage": "https://github.com/cacalot123/web-tool",
+  "homepage": "https://github.com/cacalot123/web-tool-cli",
   "mail": "chris.fu <1161167@qq.com>",
   "license": "MIT",
   "bin": {
