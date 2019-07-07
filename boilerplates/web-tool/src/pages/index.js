@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import ScrollToTop from '@component/scrollToTop';
 import {Layout1} from '@component/layout';
 import CourseRouters from './course/router';
@@ -31,7 +30,6 @@ const Xoute = ({path, component}) => (
 class Main extends Component {
   render() {
     const baseName = pageageJson.name;
-    console.log('baseName', baseName);
     return (
       <Provider store={store}>
         <BrowserRouter
@@ -41,6 +39,8 @@ class Main extends Component {
             <div className="container">
               <Route path="/" component={Layout1}/>
               <Switch>
+                <Route path="/index" component={() => <Redirect to="/course"/>}/>
+
                 {CourseRouters.map((route, i) => {
                   const key = `course${i}`;
                   return (

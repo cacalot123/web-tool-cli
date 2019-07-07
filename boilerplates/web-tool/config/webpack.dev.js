@@ -5,9 +5,11 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fs = require('fs');
 const vConsolePlugin = require('vconsole-webpack-plugin');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const webpackBaseConfig = require('./webpack.rules.js');
 const packageJson = require('../package');
 
+const port = 8888;
 
 fs.open('./config/env.js', 'w', function (err, fd) {
   if (process.env.thisEnv === 'dev') { //dev本地环境
@@ -54,7 +56,6 @@ function getTemplate(globPath) {
     entries[index].name = name;
     entries[index].src = './' + filepath;
     entries[index].template = './src/template.html';
-
   });
   return entries;
 }
@@ -143,7 +144,7 @@ module.exports = merge(webpackBaseConfig, {
   },
   output: outputJson,                                             // 出口文件
   devServer: {
-    port: 8888,             // 监听端口
+    port,             // 监听端口
     compress: true,         // gzip压缩
     https: false,             //配置https
     publicPath: '/',
@@ -171,9 +172,11 @@ module.exports = merge(webpackBaseConfig, {
   plugins: [
     ...htmlPlugin,
     new vConsolePlugin({
-      filter: [],  // 需要过滤的入口文件
+      filter: [], // 需要过滤的入口文件
       enable: true // vconsole 开启
     }),
+    new OpenBrowserPlugin({ url: `http://localhost:${port}/${packageJson.name}/index` })
+
     // new MiniCssExtractPlugin({  //css独立打包
     //   // Options similar to the same options in webpackOptions.output
     //   // both options are optional
