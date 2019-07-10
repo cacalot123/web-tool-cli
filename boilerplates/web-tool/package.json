@@ -52,6 +52,7 @@
     "morgan": "^1.9.1",
     "node-sass": "^4.9.3",
     "npm-check": "^5.7.1",
+    "open-browser-webpack-plugin": "0.0.5",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss": "^7.0.2",
     "postcss-loader": "^2.1.6",
