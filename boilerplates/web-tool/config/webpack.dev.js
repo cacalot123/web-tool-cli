@@ -4,7 +4,7 @@ const merge = require('webpack-merge');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fs = require('fs');
-const vConsolePlugin = require('vconsole-webpack-plugin');
+const VConsolePlugin = require('vconsole-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const webpackBaseConfig = require('./webpack.rules.js');
 const packageJson = require('../package');
@@ -171,7 +171,7 @@ module.exports = merge(webpackBaseConfig, {
   },
   plugins: [
     ...htmlPlugin,
-    new vConsolePlugin({
+    new VConsolePlugin({
       filter: [], // 需要过滤的入口文件
       enable: true // vconsole 开启
     }),
