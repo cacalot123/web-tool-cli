@@ -60,8 +60,6 @@
     "postcss-px2rem": "^0.3.0",
     "qs": "^6.5.2",
     "react-hot-loader": "^4.6.3",
-    "react-sticky": "^6.0.3",
-    "react-swipe": "^5.1.1",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
