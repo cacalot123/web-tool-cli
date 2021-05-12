@@ -40,7 +40,7 @@
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.3",
     "npm-check": "^5.7.1",
-    "postcss": "^7.0.2",
+    "postcss": "^8.2.10",
     "postcss-loader": "^2.1.6",
     "postcss-plugin-pxtorem": "^0.0.1",
     "postcss-px2rem": "^0.3.0",
